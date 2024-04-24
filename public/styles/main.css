@@ -1,0 +1,272 @@
+body {
+    margin: 0px !important;
+}
+
+.save {
+    background: #4CCD99;
+    padding-right: 0%;
+    padding-left: 0;
+    margin: 0%;
+}
+
+.tagline {
+    color: #000;
+    font-family: "Monoton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    line-height: normal;
+    padding-left: 1rem;
+}
+
+.chota-badal {
+    border-radius: 347px 347px 0px 0px;
+    background: #A3FFD6;
+    height: 85px;
+    position: relative;
+    bottom: -135px;
+}
+
+.medium-badal {
+    border-radius: 381px 0px 0px 0px;
+    background: #A3FFD6;
+    height: 220px;
+    position: relative;
+    z-index: 2;
+}
+
+.lpage {
+    background: url("/images/Rectangle 9.png") lightgray 50% / cover no-repeat;
+    position: relative;
+    z-index: 5;
+    right: 400px;
+    bottom: 150px;
+    width: 430px;
+    height: 330px;
+    border-radius: 10px;
+}
+
+.bada-badal {
+    border-radius: 347px 347px 0px 0px;
+    height: 140px;
+    background: #A3FFD6;
+    position: relative;
+    bottom: -80px;
+    z-index: 2;
+}
+
+.badal {
+    background: #4CCD99;
+    margin: 0;
+    padding-left: 0%;
+}
+
+.sec {
+    margin: 0px;
+    padding-right: 0% !important;
+}
+
+.green {
+    row-gap: 0;
+}
+
+.btns {
+    border-radius: 42px;
+    background: linear-gradient(90deg, #7AA2E3 0%, #1B36E5 98.4%);
+    margin-left: 1rem;
+}
+
+.text {
+    color: #FFF;
+    font-family: Inika;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.logo {
+    position: relative;
+    z-index: 4;
+    right: -300px;
+    margin-bottom: 0;
+    height: 165.5px;
+    bottom: 10px;
+}
+
+#p11 {
+    height: 200px;
+    position: relative;
+    left: 2px;
+}
+
+#p12 {
+    height: 180px;
+    position: relative;
+    top: 8px;
+    left: 2px;
+
+}
+
+#p13 {
+    height: 160px;
+    position: relative;
+    top: 12px;
+    left: 2px;
+    bottom: 0px;
+}
+
+#p21 {
+    height: 320px;
+    position: relative;
+    right: 10px;
+}
+
+#p22 {
+    height: 220px;
+    position: relative;
+    top: 12px;
+    right: 10px;
+    bottom: 0px;
+}
+
+.form {
+    padding: 30px 30px 30px 30px;
+}
+
+.form_input {
+    border-radius: 5px;
+    margin: 5px 5px 5px 35px;
+}
+
+.form_input_lname {
+    border-radius: 5px;
+    margin: 5px 0px 5px 30px;
+    width: 150px
+}
+
+.inp {
+    border-radius: 5px;
+    margin: 2px 10px 2px 10px;
+    width: 150px;
+    height: 30px;
+    color: #000;
+    font-family: Mohave;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.cr-acc {
+    border-radius: 9px;
+    background: #003C43;
+    color: #FFF;
+    font-family: Inika;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.al-acc {
+    color: #000;
+    font-family: Inika;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+}
+
+.email {
+    width: 250px !important;
+}
+
+.pass {
+    width: 250px !important;
+}
+
+.sign {
+    position: relative;
+    top: 25px;
+    left: 40px;
+    color: #102C57;
+    font-family: Inika;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.close-button {
+    position: absolute;
+    right: 22px;
+    top: 23px;
+    cursor: pointer;
+}
+
+.dob {
+    position: relative;
+    left: 0px;
+}
+
+.dt {
+    position: relative;
+    left: 12px;
+}
+
+.rad {
+    position: relative;
+    left: 14px;
+}
+
+.lgn {
+    position: relative;
+    top: 25px;
+    left: 40px;
+    color: #102C57;
+    font-family: Inika;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 40px;
+}
+.upper{
+    top:50px;
+}
+.al-acc-lg{
+    color: #000;
+    font-family: Inika;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    left:60px;
+}
+.lpage-login{
+    background: url("/images/Rectangle 9.png") lightgray 50% / cover no-repeat;
+    position: relative;
+    z-index: 5;
+    right: 300px;
+    bottom: 150px;
+    width: 330px;
+    height: 330px;
+    border-radius: 10px;
+}
+.blog{
+    position: relative;
+    bottom: 300px !important;
+}
+.sub-al{
+    background: transparent !important;
+    border: transparent;
+    position: relative;
+    left: 30px;
+    bottom: 34px;
+}
+.log-al{
+    background: transparent !important;
+    border: transparent;
+}

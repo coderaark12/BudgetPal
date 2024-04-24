@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetPal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type=text/css href="/styles/dash.css">
+    <link rel="stylesheet" type=text/css href="/styles/common.css">
+
+</head>
+
+<body>
+    <section class="s1-dash container-fluid">
+        <div class="row container-fluid pad mar">
+            <div class=" nav-sec container-fluid offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1"
+                id="offcanvasOptions" aria-labelledby="offcanvasOptionsLabel">
+                <div class="stick ofcan">
+                    <div class="w-100 container-fluid ">
+                        <% if (locals.ImageData) { %>
+                            <img src="/images/<%= ImageData %>" alt="profile_image" class="avatar">
+                            <% } else { %>
+                                <% if (locals.Gender.toLowerCase()=='male' ) {%>
+                                    <img src="/images/images.jpg" class=" avatar container-fluid" />
+                                    <% } else{%>
+                                        <img src="/images/female.images.jpg" class=" avatar container-fluid" />
+                                        <%}%>
+                                            <%}%>
+                                                <div class="user_name container-fluid">Welcome back, <%= locals.Name %>
+                                                </div>
+                    </div>
+                    <div class="w-100 container-fluid options ">
+                        <div class="w-100 container-fluid padder">
+                            <form action="/profile" method="post">
+                                <input type="submit" name="pro" class="nav-opt" value="Profile">
+                                <input type="hidden" name="pass" value="Aditya1234@">
+                            </form>
+                        </div>
+                        <form method="post" action="/dash">
+                            <div class="w-100 container-fluid padder">
+                                <input type="submit" class="nav-opt" value="Dashboard">
+                            </div>
+                        </form>
+                        <form method="post" action="/track">
+                            <div class="w-100 container-fluid padder">
+                                <input type="submit" class="nav-opt" value="Expense Tracker">
+                            </div>
+                        </form>
+                        <form method="get" action="/chat">
+                            <div class="w-100 container-fluid padder">
+                                <input type="submit" class="nav-opt" value="Chat with Others">
+                            </div>
+                        </form>
+                        <div class="w-100 container-fluid padder lout">
+                            <form method="post" action="/signUp">
+                                <input type="submit" class="nav-opt" value="Logout">
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 pad over">
+                <nav class="navbar  sticky-top">
+                    <div class="container-fluid row">
+                        <div class="col-3"><span  class="navbar-toggler-icon slider" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasOptions" aria-controls="offcanvasOptions"></span></div>
+                            <div class="col-md-5">
+                                <ul class="horizontal-list">
+                                    <li ><a href="/dash">Home</a></li>
+                                    <li><a href="/track">Expenses</a></li>
+                                    <li><a href="/profile">Profile</a></li>
+                                    <li><a href="/chat">Chat with others</a></li>
+                                    
+                                </ul>
+                                
+                            </div>
+                        <form class="d-flex search-btn col-4">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline hov" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="w-100 card p11">
+                                <div class="bal">
+                                    <span class="card-title">Total Balance</span>
+                                    <% if(locals.Bal) { %>
+                                        <span class="">$ <%= locals.Bal %></span>
+                                        <% } else { %>
+                                            <span>$ .......</span>
+                                            <% } %>
+                                </div>
+                            </div>
+                            <div class="w-100 p12 card">
+                                <div class="rec">
+                                    <div class="scroll">
+                                        <span class="card-heading">Recent Transactions:</span>
+                                        <% if(locals.amountsArray) { for( var i=0 ; i < amountsArray.length ; i++ ) { %>
+                                            <span class="transac card plate">
+                                                <span class="mon card-t ">
+                                                    <%= locals.amountsArray[i] %>
+                                                </span>
+                                                <br>
+                                                <% if(locals.BenArray) { %>
+                                                    <% const tp=new Date(locals.DateArray[i]); %>
+                                                        <span class="date-time">
+                                                            <%= locals.BenArray[i] %>,
+                                                                <%- tp.toDateString().slice(0, 3) %>,<%-
+                                                                        tp.toDateString().slice(3, 15) %>
+                                                        </span>
+                                                        <% }else { %>
+                                                            <span class="date-time">Error loading details....</span>
+                                                            <% } %>
+
+                                            </span>
+
+                                            <% } } else { %>
+                                                <span class="transac card">
+                                                    <h6 class="mon">Sorry...</h6>
+                                                    <span class="date-time">Something might be wrong , Try
+                                                        relogin</span>
+                                                </span>
+
+                                                <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100 p13">
+                                <form>
+                                    <button class="btn btn-outline hov w-100" type="submit" formaction="/track"
+                                        formmethod="post">Add Transaction</button>
+                                    <button class="btn btn-outline hov w-100" type="submit" formaction="/track"
+                                        formmethod="post">See Transactions</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-9 container-fluid">
+                            <div class="w-100 p21 container-fluid">
+                                <div class="row ">
+                                    <div class="col-7 card chart">
+                                        <canvas id="barchart"></canvas>
+                                    </div>
+                                    <div class="col-5 card chart">
+                                        <canvas id="doughnut"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100 p22 container-fluid">
+                                <div class="row">
+                                    <div class="col-md-3 card low">
+                                        <div class="scroll">
+                                            <div class="card-title card-heading">Bills and Payment:-</div>
+                                            <% if(locals.benf_name) { %>
+                                                <% locals.benf_name.forEach((ben,index)=> { %>
+                                                    <span class="transac card plate">
+                                                        <h6 class="mon-card">
+                                                            <%= ben %>
+                                                        </h6><br>
+                                                        <% const time=new Date(locals.transac[index]); %>
+                                                            <span class="date-time">
+                                                                <%= time.toDateString().slice(0, 3) %>,<%=
+                                                                        time.toDateString().slice(3, 15) %><br>
+                                                                        <%- locals.Amount[index] %>
+                                                            </span>
+                                                    </span>
+                                                    <% }); %>
+                                                        <% } else { %>
+                                                            <span class="transac card">
+                                                                <h6 class="mon">Sorry...</h6>
+                                                                <span class="date-time">Something might be wrong , Try
+                                                                    relogin</span>
+                                                            </span>
+                                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 card low">
+                                        <div class="scroll">
+                                            <div class="card-title card-heading">Income Generated:-</div>
+                                            <% if(locals.amnt) { for( var i=0 ; i < amnt.length ; i++ ) { %>
+                                                <span class="transac card plate">
+                                                    <h6 class="mon-card card-tit">
+                                                        <%= locals.amnt[i] %>
+                                                    </h6>
+                                                    <br>
+                                                    <% const timestamp=new Date(locals.trans[i]); %>
+                                                        <span class="date-time card-detd"><%- locals.payees[i] %>,<br>
+                                                                <%= timestamp.toDateString().slice(0, 3) %>,<%=
+                                                                        timestamp.toDateString().slice(3, 15) %></span>
+                                                </span>
+
+                                                <% } } else { %>
+                                                    <span class="transac card">
+                                                        <h6 class="mon">Sorry...</h6>
+                                                        <span class="date-time">Something might be wrong , Try
+                                                            relogin</span>
+                                                    </span>
+                                                    <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 card low">
+                                        <div class="scroll ">
+                                            <div class="card-title card-heading">Saved Cards:-</div>
+                                            <% if (locals.card_details) { %>
+                                                <% for (let i=0; i < locals.card_details.length; i++) { %>
+                                                    <span class="transac card plate">
+                                                        <span class="mon-card card-tit">
+                                                            <%= locals.card_details[i] %>
+                                                        </span>
+                                                        <br>
+                                                        <span class="date-time card-detd">
+                                                            <%= locals.Bank[i] %>,<br>
+                                                                <%- locals.Expiry_mon[i] %> / <%- locals.Expiry_year[i]
+                                                                        %>
+                                                        </span>
+                                                    </span>
+                                                    <% } %>
+                                                        <% } else { %>
+                                                            <span class="transac card">
+                                                                <h6 class="mon">Sorry...</h6>
+                                                                <span class="date-time">Something might be wrong , Try
+                                                                    relogin</span>
+                                                            </span>
+                                                            </span>
+                                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% const data=locals.amountsArray %>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('doughnut');
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ],
+                datasets: [{
+                    label: 'Transaction Amount',
+                    data: [12000, 13000, 17000, 27500, 20000, 15000, 9000, 17500, 15400, 25000, 23400, 13000],
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(255, 99, 132)',
+                        'rgba(255, 159, 64)',
+                        'rgba(255, 205, 86)',
+                        'rgba(75, 192, 192)',
+                        'rgba(54, 162, 235)',
+                        'rgba(153, 102, 255)',
+                        'rgba(201, 203, 207)'
+                    ],
+                }]
+            },
+        });
+        const ptx = document.getElementById('barchart');
+        new Chart(ptx, {
+            type: 'line',
+            data: {
+                labels: [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ],
+                datasets: [{
+                    label: 'Transaction amount',
+                    data: [12000, 13000, 17000, 27500, 20000, 15000, 9000, 17500, 15400, 25000, 23400, 13000],
+                    borderWidth: 2,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.5
+                }]
+            },
+        });
+    </script>
+</body>
+
+</html>

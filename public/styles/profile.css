@@ -1,0 +1,47 @@
+.cover-photo{
+    height:150px;
+    background: #003C43;;    
+}
+.cover-image{
+    height: 170px;
+    width: 170px;
+    border-radius: 100%;
+    color: #000;
+    font-family: Mohave;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: relative;
+    top:-120px;
+    left:40px ;
+}
+.edit{
+    margin-left: 65px;
+    color: #fff;
+    font-family: Mohave;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: relative;
+    top:-5rem;
+    
+}
+.up-img{
+    margin-left: 55px;
+    color: #fff;
+    font-family: Mohave;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: relative;
+    top:-7rem;
+}
+.fl-upload{
+    margin-left:1rem;
+}
+.bl{
+    color: #F2F7FF !important;
+}

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetPal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type=text/css href="/styles/dash.css">
+    <link rel="stylesheet" type=text/css href="/styles/profile.css">
+    <link rel="stylesheet" type=text/css href="/styles/common.css">
+
+</head>
+
+<body>
+    <section class="s1 container-fluid">
+        <div class="row container-fluid pad mar">
+            <div class="col-3 nav-sec container-fluid">
+                <div class="lup">
+                    <div class="w-100 container-fluid ">
+                        <% if (locals.ImageData) { %>
+                            <img src="/images/<%= ImageData %>" alt="profile_image" class="avatar">
+                            <% } else { %>
+                                <% if (locals.Gender.toLowerCase()=='male' ) {%>
+                                    <img src="/images/images.jpg" class=" avatar container-fluid" />
+                                    <% } else{%>
+                                        <img src="/images/female.images.jpg" class=" avatar container-fluid" />
+                                        <%}%>
+                                            <%}%>
+                                                <div class="user_name container-fluid">Welcome back, <%= locals.Name %>
+                                                </div>
+                    </div>
+                    <div class="w-100 container-fluid options">
+                        <div class="w-100 container-fluid padder">
+                            <form action="/profile" method="post">
+                                <input type="submit" name="pro" class="nav-opt" value="Profile">
+                            </form>
+                        </div>
+                        <form method="post" action="/dash">
+                            <div class="w-100 container-fluid padder">
+                                <input type="submit" class="nav-opt" value="Dashboard">
+                            </div>
+                        </form>
+                        <form method="post" action="/track">
+                            <div class="w-100 container-fluid padder">
+                                <input type="submit" class="nav-opt" value="Expense Tracker">
+                            </div>
+                        </form>
+                        <form method="get" action="/chat">
+                            <div class="w-100 container-fluid padder">
+                                <input type="submit" class="nav-opt" value="Chat with Others">
+                            </div>
+                        </form>
+                        <div class="w-100 container-fluid padder lout">
+                            <form method="post" action="/signUp">
+                                <input type="submit" class="nav-opt " value="Logout">
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-9 pad over">
+                <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTransaction" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Transactions
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownTransaction">
+                                        <li><a class="dropdown-item" href="#" onclick=add_trans()>Add</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick=show_transaction()>Show</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBills" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Bills and Payments
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownBills">
+                                        <li><a class="dropdown-item" href="#" onclick=add_bill()>Add</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick=show_bill()>Show</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownIncome" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Income
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownIncome">
+                                        <li><a class="dropdown-item" href="#" onclick=add_inc()>Add</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick=show_inc()>Show</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCards" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Cards
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownCards">
+                                        <li><a class="dropdown-item" href="#" onclick=add_card()>Add</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick=show_card()>Show</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn hov" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="w-100 container-fluid">
+                    <div class="row">
+                        <div id="addshow"></div>
+                    </div>
+                </div>
+
+                <div class="w-100 show_form">
+                    <div class="row">
+                        <% if(locals.amountsArray) { for( var i=0 ; i < amountsArray.length ; i++ ) { %>
+                            <span class="card col-3 plate ">
+                                <span class="mon">
+                                    <%= locals.amountsArray[i] %>
+                                </span>
+                                <br>
+                                <% if(locals.BenArray) { %>
+                                    <% const tp=new Date(locals.DateArray[i]); %>
+                                        <span class="date-time">
+                                            <%= locals.BenArray[i] %>,
+                                                <%- tp.toDateString().slice(0, 3) %>,<%- tp.toDateString().slice(3, 15)
+                                                        %>
+                                        </span>
+                                        <% }else { %>
+                                            <span class="date-time">Error loading details....</span>
+                                            <% } %>
+
+                            </span>
+
+                            <% } } else { %>
+                                <span class="transac card col">
+                                    <h6 class="mon">Sorry...</h6>
+                                    <span class="date-time">Something might be wrong , Try relogin</span>
+                                </span>
+
+                                <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function add_trans() {
+            const ct = document.getElementsByClassName('show_form')[0];
+            ct.innerHTML = `<div class="container-fluid">
+    <div class="row justify-content form-track">
+        <div class="col-md-6 form-align">
+                <div class="card-body">
+                    <h5 class="card-title Form-head">Add Transaction</h5>
+                    <form action="/add_transaction" method="post">
+                        <div class="form-group">
+                            <label for="beneficiary_or_payee_name" class="form-check-label al-acc dt bl">Beneficiary or Payee Name:</label>
+                            <input type="text" id="beneficiary_or_payee_name" name="beneficiary_or_payee_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount" class="form-check-label al-acc dt bl ">Amount:</label>
+                            <input type="number" id="amount" name="amount" class="form-control" min="0" step="0.01" required>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="category" class="form-check-label al-acc dt bl" >Category:</label>
+                            <select id="category" name="category" class="form-control" required>
+                                <option value="received">Received</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="t_date" class=" form-check-label al-acc dt bl ">Transaction Date:</label>
+                        <input type="date"  name="t_date" class="form-control inp"  required>
+                        </div> 
+                        </div> 
+                        </div>
+                        <button type="submit" class="btn btn-outline hov cen ">Add Transaction</button>
+                    </form>
+                </div>
+        
+        </div>
+    </div>
+</div>
+`;
+        }
+        function add_bill() {
+            const ct = document.getElementsByClassName('show_form')[0];
+            ct.innerHTML = `<div class="container">
+<div class="row justify-content form-track">
+<div class="col-md-6 form-align">
+        <div class="card-body ">
+            <h5 class="card-title Form-head ">Add Bills and Payments</h5>
+            <form action="/add_bill" method="post">
+                <div class="form-group">
+                    <label for="beneficiary_name" class="form-check-label al-acc dt bl">Beneficiary Name:</label>
+                    <input type="text" id="beneficiary_name" name="beneficiary_name" class="form-control inp " required>
+                </div>
+                <div class="row">
+                <div class="form-group">
+                    <label for="transaction_date" class="form-check-label al-acc dt bl">Transaction Date:</label>
+                    <input type="date" id="transaction_date" name="transaction_date" class="form-control inp" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount" class="form-check-label al-acc dt bl">Amount:</label>
+                    <input type="number" id="amount" name="amount" class="form-control" min="0" step="0.01" required>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-outline hov cen">Add Bill or Payment</button>
+            </form>
+        </div>
+</div>
+<div class="col-4"></div>
+</div>
+</div>
+`;
+        }
+        function add_inc() {
+            const ct = document.getElementsByClassName('show_form')[0];
+            ct.innerHTML = `<div class="container">
+<div class="row justify-content form-track">
+<div class="col-md-6 form-align">
+        <div class="card-body">
+            <h5 class="card-title Form-head">Add Income</h5>
+            <form action="/add_income" method="post">
+                <div class="form-group">
+                    <label for="payee_name" class="form-check-label al-acc dt bl">Payee Name:</label>
+                    <input type="text" id="payee_name" name="payee_name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="income_date" class="form-check-label al-acc dt bl">Income Date:</label>
+                    <input type="date" id="income_date" name="income_date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount" class="form-check-label al-acc dt bl">Amount:</label>
+                    <input type="number" id="amount" name="amount" class="form-control" min="0" step="0.01" required>
+                </div>
+                <button type="submit" class="btn btn-outline hov cen">Add Income</button>
+            </form>
+        </div>
+</div>
+<div class="col-2"></div>
+</div>
+</div>
+`;
+        }
+        function add_card() {
+            const ct = document.getElementsByClassName('show_form')[0];
+            ct.innerHTML = `<div class="container">
+<div class="row justify-content form-track">    
+    <div class="col-md-6 form-align">
+            <div class="card-body">
+                <h5 class="card-title Form-head">Add Card</h5>
+                <form action="/add_card" method="post">
+                    <div class="form-group">
+                        <label for="card_number" class="form-check-label al-acc dt bl">Card Number:</label>
+                        <input type="text" id="card_number" name="card_number" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank" class="form-check-label al-acc dt bl">Bank:</label>
+                        <input type="text" id="bank" name="bank" class="form-control" required>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="expiry_month" class="form-check-label al-acc dt bl">Expiry Month:</label>
+                        <input type="number" id="expiry_month" name="expiry_month" class="form-control" min="1" max="12" required>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="expiry_year" class="form-check-label al-acc dt bl">Expiry Year:</label>
+                        <input type="number" id="expiry_year" name="expiry_year" class="form-control" min="2022" required>
+                    </div>
+                    </div>
+                    <div>
+                    <button type="submit" class="btn btn-outline hov cen">Add Card</button>
+                </form>
+            </div>
+    </div>
+    </div>
+    </div>`;
+        }
+
+    </script>
+    <script>
+        function show_transaction() {
+            const st = document.getElementsByClassName('show_form')[0];
+            st.innerHTML = `<div class="row"><% if(locals.amountsArray) { for( var i=0 ; i < amountsArray.length ; i++ ) { %>
+        <div class="col-3 card-row ">
+                <span class="card plate">
+                <span class="mon ">
+                    <%= locals.amountsArray[i] %>
+                </span>
+                <br>
+                <% if(locals.BenArray) { %>
+                    <% const tp = new Date(locals.DateArray[i]); %>
+                <span class="date-time">
+                    <%= locals.BenArray[i] %>,
+                    <%- tp.toDateString().slice(0, 3) %>,<%- tp.toDateString().slice(3, 15) %>
+                </span>
+                <% }else { %>
+                <span class="date-time">Error loading details....</span>
+                <% } %>
+                </span>
+            </div>
+
+        <% } } else { %>
+            <span class="transac card col ">
+                <h6 class="mon">Sorry...</h6>
+                <span class="date-time">Something might be wrong , Try relogin</span>
+            </span>
+            
+            <% } %>
+            <div>
+    `
+        }
+        function show_bill() {
+            const st = document.getElementsByClassName('show_form')[0];
+            st.innerHTML = `<div class="row form-track"><% if(locals.benf_name) { %>
+                                                <% locals.benf_name.forEach((ben,index) => { %>
+                                                    <span class=" card col-3 plate">
+                                                        <h6 class="mon">
+                                                            <%= ben %>
+                                                        </h6>
+                                                        <% const time = new Date(locals.transac[index]); %>
+                                                        <span class="date-time">
+                                                            <%= time.toDateString().slice(0, 3) %>,<%= time.toDateString().slice(3, 15) %><br>
+                                                            <%- locals.Amount[index] %>
+                                                        </span>
+                                                    </span>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <span class="transac card">
+                                                    <h6 class="mon">Sorry...</h6>
+                                                    <span class="date-time">Something might be wrong , Try relogin</span>
+                                                </span>
+                                            <% } %>
+            <div>
+    `
+        }
+        function show_inc() {
+            const st = document.getElementsByClassName('show_form')[0];
+            st.innerHTML = `
+        <div class="row">
+        <% if(locals.amnt) { for( var i=0 ; i < amnt.length ; i++ ) { %>
+        <span class="card col-3 plate">
+        <span class="mon">
+        <%= locals.amnt[i] %>
+        </span>
+        <% const timestamp = new Date(locals.trans[i]); %>
+        <span class="date-time"><%- locals.payees[i] %>,<br><%= timestamp.toDateString().slice(0, 3) %>,<%= timestamp.toDateString().slice(3, 15) %></span>
+        </span>
+    
+         <% } } else { %>
+        <span class="transac card">
+        <h6 class="mon">Sorry...</h6>
+        <span class="date-time">Something might be wrong , Try relogin</span>
+         </span>
+        <% } %>
+        <div>
+    `
+        }
+        function show_card() {
+            const st = document.getElementsByClassName('show_form')[0];
+            st.innerHTML = `<div class="row"><% if (locals.card_details) { %>
+                                                <% for (let i = 0; i < locals.card_details.length; i++) { %>
+                                                    <span class=" card col-4 plate-card">
+                                                        <span class="mon-card">
+                                                            <%= locals.card_details[i] %>
+                                                        </span>
+                                                        <span class="date-time">
+                                                            <%= locals.Bank[i] %>,<br>
+                                                            <%- locals.Expiry_mon[i] %> / <%- locals.Expiry_year[i] %>
+                                                        </span>
+                                                    </span>
+                                                <% } %>
+                                            <% } else { %>
+                                                <span class="transac card">
+                                                    <h6 class="mon">Sorry...</h6>
+                                                    <span class="date-time">Something might be wrong , Try relogin</span>
+                                                </span>
+                                            </span>
+                                            <% } %>
+            <div>
+    `
+        }
+        function trans() {
+            const as = document.getElementById('addshow');
+            as.innerHTML = `
+            <div class="row">
+                <div class ='col-md-1 card-row'>
+                <div class="btn-group">
+                        <button type="button" class="btn btn-c "  onclick=add_trans()>Add</button>
+                        <button type="button" class="btn-c btn "  onclick=show_transaction()>Show</button>
+                </div>
+                </div>
+            </div>
+            `;
+
+        }
+        function bill() {
+            const as = document.getElementById('addshow');
+            as.innerHTML = `
+            <div class="row">
+                <div class ="col-md-2 card-row"></div>
+                <div class ='col-md-1 card-row'>
+                <div class="btn-group">
+                        <button type="button" class="btn btn-c " id="add_tran" onclick=add_bill()>Add</button>
+                        <button type="button" class="btn-c btn " id="bill" onclick=show_bill()>Show</button>
+                </div>
+                </div>
+            </div>
+            `;
+
+        }
+        function inc() {
+            const as = document.getElementById('addshow');
+            as.innerHTML = `
+            <div class="row">
+                <div class ="col-md-5 card-row"></div>
+                <div class ='col-md-1 card-row'>
+                <div class="btn-group">
+                        <button type="button" class="btn btn-c " id="add_tran" onclick=add_inc()>Add</button>
+                        <button type="button" class="btn-c btn " id="bill" onclick=show_inc()>Show</button>
+                </div>
+                </div>
+            </div>
+            `;
+
+        }
+        function card() {
+            const as = document.getElementById('addshow');
+            as.innerHTML = `
+            <div class="row">
+                <div class ="col-md-7 card-row"></div>
+                <div class ='col-md-1 card-row'>
+                <div class="btn-group">
+                        <button type="button" class="btn btn-c " id="add_tran" onclick=add_card()>Add</button>
+                        <button type="button" class="btn-c btn " id="bill" onclick=show_card()>Show</button>
+                </div>
+                </div>
+            <div>
+            `;
+
+        }
+
+    </script>
+</body>
+
+</html>
